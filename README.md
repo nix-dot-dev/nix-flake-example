@@ -38,14 +38,15 @@ this flake:
 1. You can clone this repo and run `nix develop` inside of it:
 
    ```shell
-   git clone https://github.com/nix-dot-dev/flake-template && cd flake-template
+   git clone https://github.com/nix-dot-dev/nix-flake-example
+   cd nix-flake-example
    nix develop
    ```
 
 2. You can run `nix develop` and provide the flake reference to this repo:
 
    ```shell
-   nix develop github:nix-dot-dev/flake-template
+   nix develop github:nix-dot-dev/nix-flake-example
    ```
 
 This will likely take some time, as Nix needs to install the tools provided in
