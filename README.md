@@ -43,15 +43,21 @@ this flake:
    nix develop
    ```
 
+   > **Note**: If you have [direnv] installed, you can also enter this
+   > flake-provided development environment by running `direnv allow`. Once
+   > you've done that, you will automatically enter the environment every time
+   > you navigate to this directory.
+
 2. You can run `nix develop` and provide the flake reference to this repo:
 
    ```shell
    nix develop github:nix-dot-dev/nix-flake-example
    ```
 
-This will likely take some time, as Nix needs to install the tools provided in
-the environment. Once that's finished, you should be greeted by a welcome message
-and then enter a [Bash] shell with a `bash-5.1$` prompt.
+This will likely take some time, as Nix needs to download [Nixpkgs] and then
+install the tools provided in the environment. Once that's finished, you should
+be greeted by a welcome message and then enter a [Bash] shell with a `bash-5.1$`
+prompt.
 
 This dev environment provides several tools:
 
@@ -80,11 +86,6 @@ That means that if you run `node`, `npm`, `python`, and so on you'll use
 versions of those tools in the Nix store and _not_ versions installed in
 directories like `/usr/bin`.
 
-> **Note**: If you have [direnv] installed, you can also enter this
-> flake-provided development environment by running `direnv allow`. Once you've
-> done that, you will automatically enter the environment every time you
-> navigate to this directory.
-
 [bash]: https://gnu.org/software/bash
 [direnv]: https://direnv.net
 [enable]: https://nixos.wiki/wiki/Flakes#Enable_flakes
@@ -93,6 +94,7 @@ directories like `/usr/bin`.
 [go]: https://go.dev
 [install]: https://nixos.org/download
 [nix.dev]: https://nix.dev
+[nixpkgs]: https://github.com/NixOS/nixpkgs
 [node.js]: https://nodejs.org
 [python]: https://python.org
 [store]: https://nixos.org/manual/nix/stable/command-ref/nix-store
