@@ -1,6 +1,8 @@
 {
   # If you wish, you can provide flakes with a description string. This string is
-  # shown if you run `nix flake show` to get information about a flake.
+  # shown if you run `nix flake show` to get information about the flake. To see
+  # this description string, run this command:
+  # `nix flake show github:nix-dot-dev/nix-flake-example`
   description = "nix.dev starter template for Nix flakes";
 
   # Flake inputs are Nix code dependencies. What you don't see here in
@@ -15,6 +17,9 @@
     # for GitHub repos, but other prefixes include `gitlab` for GitLab repos,
     # `path` for directories in the local filesystem, and more.
     nixpkgs.url = "github:NixOS/nixpkgs";
+
+    # Although Nixpkgs is extremely common, you can use any valid flake as an
+    # input.
   };
 
   # Outputs are what the flake provides (packages, NixOS configurations, dev
@@ -25,12 +30,12 @@
     let
       # A set of systems to provide outputs for. In Nix flakes, many output
       # types, like packages and development environments, need to be for
-      # specific systems.
+      # specific systems. This flake supports these systems:
       supportedSystems = [
-        "x86_64-linux"
-        "aarch64-linux"
-        "x86_64-darwin"
-        "aarch64-darwin"
+        "x86_64-linux" # Linux on AMD/Intel
+        "aarch64-linux" # Linux on ARM64
+        "x86_64-darwin" # macOS on AMD/Intel
+        "aarch64-darwin" # macOS on Apple Silicon
       ];
 
       # Helper function to provide per-system outputs.
