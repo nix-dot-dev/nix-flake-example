@@ -18,15 +18,17 @@
     # `path` for directories in the local filesystem, and more.
     nixpkgs.url = "github:NixOS/nixpkgs";
 
-    # Although Nixpkgs is extremely common, you can use any valid flake as an
-    # input.
+    flake-utils.url = "github:numtide/flake-utils";
+
+    # Although Nixpkgs and flake-utils are extremely common, you can use any
+    # valid flake as an input.
   };
 
   # Outputs are what the flake provides (packages, NixOS configurations, dev
   # environments, and more). Flakes *must* have outputs or else they are... kind
   # of pointless! In fact, you can think of flakes as a way of sharing Nix code
   # with others.
-  outputs = { self, nixpkgs }:
+  outputs = { self, nixpkgs, flake-utils }:
     let
       # A set of systems to provide outputs for. In Nix flakes, many output
       # types, like packages and development environments, need to be for
@@ -37,24 +39,23 @@
         "x86_64-darwin" # macOS on AMD/Intel
         "aarch64-darwin" # macOS on Apple Silicon
       ];
-
-      # Helper function to provide per-system outputs.
-      nameValuePair = name: value: { inherit name value; };
-      genAttrs = names: f: builtins.listToAttrs (map (n: nameValuePair n (f n)) names);
-      forAllSystems = f: genAttrs supportedSystems (system: f {
-        # Passing a system attribute to `nixpkgs` produces a system-specific
-        # Nixpkgs
-        pkgs = import nixpkgs { inherit system; };
-      });
     in
-    {
-      # Development environments provided by the flake
-      devShells = forAllSystems ({ pkgs }: {
+    flake-utils.lib.eachSystem supportedSystems (system:
+      let
+        # This creates a system-specific version of Nixpkgs and stores it in a
+        # variable
+        pkgs = import nixpkgs { inherit system; };
+      in
+      {
         # When you specify a `default` environment, you can enter it by running
         # `nix develop` with no arguments. In other words `nix develop` is the
         # equivalent of `nix develop .#default`.
-        default = pkgs.mkShell {
-          # The packages provided in the environment
+        devShells.default = pkgs.mkShell {
+          # The packages provided in the environment. Because the packages are
+          # included in the `pkgs` attribute set, each is pinned to a specific
+          # revision of Nixpkgs via `flake.lock`, which makes the environment
+          # reproducible (as anyone else using this environment uses the same
+          # Git revision).
           buildInputs = with pkgs; [
             python310 # Python 3.10
             go_1_19 # Go 1.19
@@ -75,5 +76,4 @@
           '';
         };
       });
-    };
 }

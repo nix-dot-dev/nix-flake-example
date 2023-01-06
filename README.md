@@ -1,7 +1,12 @@
 # Nix flake development environment example
 
-This repo provides an example [Nix flake][flakes] that outputs a Nix [development
-environment][env].
+> **Warning**: [Nix flakes][flakes] are an experimental feature in [Nix]. Flakes
+> will eventually become the de facto standard way to use Nix and thus you may
+> find it worthwhile to learn how to use them. But beware that there may be
+> breaking changes in the user interface around flakes.
+
+This repo provides an example [Nix flake][flakes] that outputs a reproducible Nix
+[development environment][env] that works across [several systems][systems].
 
 ## Prerequisites
 
@@ -21,6 +26,8 @@ Or as JSON:
 ```shell
 nix flake show --json
 ```
+
+### System support
 
 As you can see, this flake outputs `default` development environments
 (`devShells`) for a variety of architectures:
@@ -93,9 +100,11 @@ directories like `/usr/bin`.
 [flakes]: https://nixos.wiki/wiki/Flakes
 [go]: https://go.dev
 [install]: https://nixos.org/download
+[nix]: https://nixos.org
 [nix.dev]: https://nix.dev
 [nixpkgs]: https://github.com/NixOS/nixpkgs
 [node.js]: https://nodejs.org
 [python]: https://python.org
 [store]: https://nixos.org/manual/nix/stable/command-ref/nix-store
+[systems]: #system-support
 [terraform]: https://terraform.io
