@@ -18,14 +18,27 @@ jobs:
     steps:
       - name: git checkout
         uses: actions/checkout@v3
+
+      # This step installs Nix using cachix/install-nix-action:
+      #
+      # https://github.com/marketplace/actions/install-nix)
+      #
+      # Another Nix insaller Action widely used in the community is the Nix
+      # Quick Install Action from nixbuild.net, which has a similar interface:
+      #
+      # https://github.com/marketplace/actions/nix-quick-install
       - name: Install Nix
-        uses: cachix/install-nix-action@v17
+        uses: cachix/install-nix-action@v18
         with:
           extra_nix_config: |
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
       - name: Display versions
         run: |
-          nix develop --command type python
-          nix develop --command type go
-          nix develop --command type node
-          nix develop --command type terraform
+          nix develop
+
+          type python
+          type go
+          type node
+          type terraform
+
+          exit
