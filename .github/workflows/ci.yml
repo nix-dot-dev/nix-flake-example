@@ -34,11 +34,7 @@ jobs:
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
       - name: Display versions
         run: |
-          nix develop
-
-          type python
-          type go
-          type node
-          type terraform
-
-          exit
+          nix develop --command which python
+          nix develop --command which go
+          nix develop --command which node
+          nix develop --command which terraform
