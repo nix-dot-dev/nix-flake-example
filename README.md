@@ -21,12 +21,6 @@ To see what this flake provides:
 nix flake show
 ```
 
-Or as JSON:
-
-```shell
-nix flake show --json
-```
-
 ### System support
 
 As you can see, this flake outputs `default` development environments
