@@ -49,11 +49,6 @@ this flake:
    > you've done that, you will automatically enter the environment every time
    > you navigate to this directory.
 
-2. You can run `nix develop` and provide the flake reference to this repo:
-
-   ```shell
-   nix develop github:nix-dot-dev/nix-flake-example
-   ```
 
 This will likely take some time, as Nix needs to download [Nixpkgs] and then
 install the tools provided in the environment. Once that's finished, you should
