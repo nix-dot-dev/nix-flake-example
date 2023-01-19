@@ -57,9 +57,9 @@
           # reproducible (as anyone else using this environment uses the same
           # Git revision).
           buildInputs = with pkgs; [
-            python310 # Python 3.10
-            go_1_19 # Go 1.19
-            nodejs-18_x # Node.js 18
+            python3 # Python 3.10 in this revision of nixpkgs
+            go # Go 1.19
+            nodejs # Node.js 18
             terraform
           ];
 
