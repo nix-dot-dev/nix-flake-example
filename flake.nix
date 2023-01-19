@@ -56,7 +56,7 @@
           # revision of Nixpkgs via `flake.lock`, which makes the environment
           # reproducible (as anyone else using this environment uses the same
           # Git revision).
-          buildInputs = with pkgs; [
+          packages = with pkgs; [
             python3 # Python 3.10 in this revision of nixpkgs
             go # Go 1.19
             nodejs # Node.js 18
